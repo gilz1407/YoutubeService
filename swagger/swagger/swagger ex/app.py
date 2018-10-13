@@ -4,20 +4,15 @@ import logging
 import pytest
 from gevent import os
 
+from Channel import Channel
 from swagger.swagger.logic import get_authenticated_service, channels_list_by_username
 
 parentFolder=".."
 def post_testByFile(TestFile):
     pytest.main([parentFolder+TestFile["fileName"]])
 
-def get_channelDetailes(details):
-    # When running locally, disable OAuthlib's HTTPs verification. When
-    # running in production *do not* leave this option enabled.
-    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-    service = get_authenticated_service()
-    channels_list_by_username(service,
-                              part='snippet,contentDetails,statistics',
-                              forUsername='gilz1407')
+def post_UpdateChannelDetails(details):
+    Channel().UpdateChannelSection(details)
 
 
 def post_testByMarks(Marker):

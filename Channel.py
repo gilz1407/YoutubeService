@@ -131,24 +131,27 @@ class Channel:
 
     def UpdateChannelSection(self,data):
         self.channels_update_branding_settings(self.client,
-                                          {'id': 'UCfflPRy4IEYFKbhHAtbANiA',
-                                           'brandingSettings.channel':{
-                "title": data["title"],#"TestAutomation",
-                "description":data["description"],#"My first channel",
-                "defaultTab": "Featured",
-                "showRelatedChannels": True,
-                "showBrowseView": True,
-                "profileColor": "#000000",
-                "defaultLanguage":"en_US"
-            },
-                'brandingSettings.image':{
-                "bannerImageUrl":"http://storage.googleapis.com/ehimages/2018/3/16/img_377e85ec2c9211d7fe7fb985f2dfb7d9_1521183373492_original.png"
-            },
-                                           'brandingSettings.hints':[{"property": "channel.modules.show_comments.bool", "value": "True"}, {"property": "channel.featured_tab.template.string", "value": "Everything"}]
+                                          {
+                                              'id': 'UCfflPRy4IEYFKbhHAtbANiA',
+                                              'brandingSettings.channel':
+                                              {
+                                                "title": data["title"],#"TestAutomation",
+                                                "description":data["description"],#"My first channel",
+                                                "defaultTab": "Featured",
+                                                "showRelatedChannels": True,
+                                                "showBrowseView": True,
+                                                "profileColor": "#000000",
+                                                "defaultLanguage":"en_US"
+                                              },
+                                              'brandingSettings.image':
+                                              {
+                                                "bannerImageUrl":"http://storage.googleapis.com/ehimages/2018/3/16/img_377e85ec2c9211d7fe7fb985f2dfb7d9_1521183373492_original.png"
+                                              },
+                                              'brandingSettings.hints':[{"property": "channel.modules.show_comments.bool", "value": "True"}, {"property": "channel.featured_tab.template.string", "value": "Everything"}]
                                             },
                                           part='brandingSettings')
         try:
-            self.upload_banner("D:/ex.png")
+            self.upload_banner(data["bannerImage"])#"D:/ex.png")
         except HttpError as e:
             print ("An HTTP error %d occurred:\n%s" % (e.resp.status, e.content))
         else:
@@ -168,4 +171,4 @@ class Channel:
                                 part='snippet,contentDetails,targeting',
                                 onBehalfOfContentOwner='')
 
-Channel().UpdateChannelSection()
+#Channel().UpdateChannelSection()
