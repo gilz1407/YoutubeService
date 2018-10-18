@@ -16,7 +16,7 @@ def post_UpdateChannelDetails(UpdateChannelInfo):
     Channel().UpdateChannelSection(UpdateChannelInfo)
 
 def PostInsertVideo(UploadVideo):
-    Video().UploadVideo(UploadVideo)
+    return Video().UploadVideo(UploadVideo),200
 
 
 def DeleteVideo(VideoToDelete):

@@ -26,9 +26,9 @@ class Video:
                 status, response = request.next_chunk()
                 if response is not None:
                     if method == 'insert' and 'id' in response:
-                        print(response)
+                        return response
                     elif method != 'insert' or 'id' not in response:
-                        print(response)
+                        return response
                     else:
                         exit("The upload failed with an unexpected response: %s" % response)
             except HttpError as e:
@@ -69,7 +69,7 @@ class Video:
         if not os.path.exists(media_file):
             exit('Please specify a valid file location.')
 
-        self.videos_insert(
+        res=self.videos_insert(
                       {'snippet.categoryId': '22',
                        'snippet.defaultLanguage': '',
                        'snippet.description': videoData["description"],#'Description of uploaded video.',
@@ -81,6 +81,7 @@ class Video:
                        'status.publicStatsViewable': ''},
                       media_file,
                       part='snippet,status')
+        return "{", "AddedVideo:",res['id'], "}"
 
     def videos_delete(self, **kwargs):
         # See full sample for function

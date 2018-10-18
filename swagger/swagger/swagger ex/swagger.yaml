@@ -39,14 +39,9 @@ paths:
             $ref: '#/definitions/UploadVideo'
       responses:
         200:
-          description: Update a new video
+          description: Id of the uploaded video
           schema:
-            type: object
-            properties:
-              pets:
-                type: array
-                items:
-                  $ref: '#/definitions/UploadVideo'
+            $ref: '#/definitions/newVideoId'
   /Delete Video:
     delete:
       tags: [Tests]
@@ -71,6 +66,19 @@ paths:
                 items:
                   $ref: '#/definitions/VideoToDelete'
 definitions:
+
+  newVideoId:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: Channel's id
+        example: "1bo10ebo12be0100"
+        minLength: 1
+        maxLength: 100
+
   UpdateChannelInfo:
     type: object
     required:
