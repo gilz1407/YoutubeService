@@ -5,30 +5,24 @@ import pytest
 from gevent import os
 
 from Channel import Channel
+from Video import Video
 from swagger.swagger.logic import get_authenticated_service, channels_list_by_username
 
 parentFolder=".."
 def post_testByFile(TestFile):
     pytest.main([parentFolder+TestFile["fileName"]])
 
-def post_UpdateChannelDetails(details):
-    Channel().UpdateChannelSection(details)
+def post_UpdateChannelDetails(UpdateChannelInfo):
+    Channel().UpdateChannelSection(UpdateChannelInfo)
+
+def PostInsertVideo(UploadVideo):
+    Video().UploadVideo(UploadVideo)
 
 
-def post_testByMarks(Marker):
-    pytest.main([parentFolder+Marker["fileName"],'-v','-m',Marker["marker"]])
+def DeleteVideo(VideoToDelete):
+    Video().videos_delete(id=VideoToDelete["id"])
 
-def post_testByName(TestName):
-    pytest.main([parentFolder+TestName["fileName"],'-k',TestName["testName"]])
 
-def post_testByFolder(FolderName):
-    _folderName=parentFolder+FolderName["folderName"]
-    for path in absoluteFilePaths(_folderName):
-        before,after = path.split(FolderName["folderName"].replace("/",""))
-        parsedAfter = after.replace("\\", "/")
-        fileName=parsedAfter.split("/")[-1]
-        if (fileName.startswith("Test")):
-            pytest.main(_folderName+parsedAfter)
 
 logging.basicConfig(level=logging.INFO)
 app = connexion.App(__name__)

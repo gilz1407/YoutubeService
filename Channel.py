@@ -2,10 +2,10 @@ import http
 import random
 from datetime import time
 
+
 import httplib2
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
-
 from AuthenticatedService import get_authenticated_service
 from Helper import remove_empty_kwargs, build_resource, print_response
 
@@ -132,10 +132,10 @@ class Channel:
     def UpdateChannelSection(self,data):
         self.channels_update_branding_settings(self.client,
                                           {
-                                              'id': 'UCfflPRy4IEYFKbhHAtbANiA',
+                                              'id': data["id"],#'UCfflPRy4IEYFKbhHAtbANiA',
                                               'brandingSettings.channel':
                                               {
-                                                "title": data["title"],#"TestAutomation",
+                                               # "title": "TestAutomation",
                                                 "description":data["description"],#"My first channel",
                                                 "defaultTab": "Featured",
                                                 "showRelatedChannels": True,
@@ -150,6 +150,12 @@ class Channel:
                                               'brandingSettings.hints':[{"property": "channel.modules.show_comments.bool", "value": "True"}, {"property": "channel.featured_tab.template.string", "value": "Everything"}]
                                             },
                                           part='brandingSettings')
+        self.channels_update_branding_settings(self.client,
+                                               {
+                                                   'id': data["id"],
+                                                   'localizations':{'en': {'title': data["title"], 'description': data["description"]}}
+                                               },
+                                               part='localizations')
         try:
             self.upload_banner(data["bannerImage"])#"D:/ex.png")
         except HttpError as e:
