@@ -22,6 +22,9 @@ def PostInsertVideo(UploadVideo):
 def DeleteVideo(VideoToDelete):
     Video().videos_delete(id=VideoToDelete["id"])
 
+def PostUploadComment(Comment):
+    Comment().uploadComment(Comment)
+
 
 
 logging.basicConfig(level=logging.INFO)
