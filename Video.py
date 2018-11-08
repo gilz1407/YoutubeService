@@ -7,7 +7,7 @@ from googleapiclient import http
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 
-from AuthenticatedService import get_authenticated_service
+from AuthenticatedService import get_authenticated_service, get_redis
 from Channel import RETRIABLE_EXCEPTIONS, RETRIABLE_STATUS_CODES
 from Helper import build_resource, print_response
 
@@ -65,6 +65,7 @@ class Video:
         return self.resumable_upload(request, 'video', 'insert')
 
     def UploadVideo(self,videoData):
+
         media_file = videoData["fileName"]#'sample_video.flv'
         if not os.path.exists(media_file):
             exit('Please specify a valid file location.')
@@ -81,6 +82,8 @@ class Video:
                        'status.publicStatsViewable': ''},
                       media_file,
                       part='snippet,status')
+
+        get_redis().publish("VideoUploaded",{"AddedVideo":res['id'],"title":videoData["title"]})
         return "{", "AddedVideo:",res['id'], "}"
 
     def videos_delete(self, **kwargs):

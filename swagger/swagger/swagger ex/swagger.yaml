@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Youtube Service API
   version: "0.1"
-  description: API for basic youtube operations.
+  description: API for basic youtube's operations.
 consumes:
   - application/json
 produces:
@@ -11,7 +11,7 @@ produces:
 paths:
   /UpdateChannelDetails:
     post:
-      tags: [Tests]
+      tags: [YouTube]
       operationId: app.post_UpdateChannelDetails
       summary: Update youtube's channel info
       parameters:
@@ -26,7 +26,7 @@ paths:
           description: Data validation error
   /Upload Video:
     post:
-      tags: [Tests]
+      tags: [YouTube]
       operationId: app.PostInsertVideo
       summary: Upload new video
       parameters:
@@ -44,7 +44,7 @@ paths:
             $ref: '#/definitions/newVideoId'
   /Delete Video:
     delete:
-      tags: [Tests]
+      tags: [YouTube]
       operationId: app.DeleteVideo
       summary: Delete video by id
       parameters:
@@ -59,15 +59,10 @@ paths:
         200:
           description: Deleted video
           schema:
-            type: object
-            properties:
-              pets:
-                type: array
-                items:
-                  $ref: '#/definitions/VideoToDelete'
+            $ref: '#/definitions/VideoId'
   /Upload Comment:
-    delete:
-      tags: [Tests]
+    post:
+      tags: [YouTube]
       operationId: app.PostUploadComment
       summary: Upload comment to specific video
       parameters:
@@ -82,14 +77,8 @@ paths:
         200:
           description: comment on video
           schema:
-            type: object
-            properties:
-              pets:
-                type: array
-                items:
-                  $ref: '#/definitions/Comment'
+              $ref: '#/definitions/CommentId'
 definitions:
-
   newVideoId:
     type: object
     required:
@@ -165,5 +154,49 @@ definitions:
         type: string
         description: video id
         example: "kb234j"
+        minLength: 1
+        maxLength: 100
+
+  VideoId:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: uploaded video id
+        example: "1234"
+  CommentId:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: comment id
+        example: "1234"
+  Comment:
+    type: object
+    required:
+      - channelId
+      - videoId
+      - content
+    properties:
+      channelId:
+        type: string
+        description: channelId
+        example: "kb234j"
+        minLength: 1
+        maxLength: 100
+      videoId:
+        type: string
+        description: video id
+        example: "kb234j"
+        minLength: 1
+        maxLength: 100
+      content:
+        type: string
+        description: The comment's content
+        example: "Cool video"
         minLength: 1
         maxLength: 100
