@@ -33,7 +33,7 @@ application = app.app
 if __name__ == '__main__':
     # run our standalone gevent server
     get_authenticated_service()
-    app.run(port=8080, server='gevent')
+    app.run(port=8081, server='gevent')
 
 def absoluteFilePaths(directory):
    for dirpath,_,filenames in os.walk(directory):

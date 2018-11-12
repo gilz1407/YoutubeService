@@ -78,7 +78,7 @@ class Video:
                        'snippet.title': videoData["title"],#'Test video upload',
                        'status.embeddable': '',
                        'status.license': '',
-                       'status.privacyStatus': 'private',#videoData["private"]
+                       'status.privacyStatus': 'public',#videoData["private"]
                        'status.publicStatsViewable': ''},
                       media_file,
                       part='snippet,status')
