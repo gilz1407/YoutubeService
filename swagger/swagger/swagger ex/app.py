@@ -7,6 +7,7 @@ from redis import Redis
 
 from AuthenticatedService import get_authenticated_service
 from Channel import Channel
+from Configuration.cm import Cm
 from Video import Video
 
 parentFolder=".."
@@ -17,6 +18,7 @@ def post_UpdateChannelDetails(UpdateChannelInfo):
     Channel().UpdateChannelSection(UpdateChannelInfo)
 
 def PostInsertVideo(UploadVideo):
+    print(os.path.dirname(os.path.abspath(__file__)))
     return Video().UploadVideo(UploadVideo),200
 
 
@@ -31,9 +33,9 @@ app = connexion.App(__name__)
 app.add_api('swagger.yaml')
 application = app.app
 if __name__ == '__main__':
-    # run our standalone gevent server
     get_authenticated_service()
-    app.run(port=8081, server='gevent')
+    config=Cm().config['SwagerConnection']
+    app.run(port=int(config['port']), server='gevent')
 
 def absoluteFilePaths(directory):
    for dirpath,_,filenames in os.walk(directory):
