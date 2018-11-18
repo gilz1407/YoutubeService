@@ -5,6 +5,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 # client_secret.
 from redis import Redis
 
+from DataBase.Elastic.ElasticOp import ElasticOp
+
 CLIENT_SECRETS_FILE = "../../../client_secret.json"
 
 # This OAuth 2.0 access scope allows for full read/write access to the
@@ -27,3 +29,6 @@ def get_redis():
     if redis_connection==None:
         redis_connection=Redis()
     return redis_connection
+
+def create_indexs():
+    ElasticOp().CreateIndex("VideoAll")

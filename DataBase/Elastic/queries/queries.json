@@ -1,0 +1,14 @@
+{
+  "queries":[
+    {
+      "name":"MatchByKey",
+      "index":"Person",
+      "type":"Person",
+      "query":{
+        "query": {
+          "match": {}
+        }
+      }
+    }
+  ]
+}

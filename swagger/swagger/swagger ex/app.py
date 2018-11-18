@@ -5,7 +5,7 @@ import pytest
 from gevent import os
 from redis import Redis
 
-from AuthenticatedService import get_authenticated_service
+from AuthenticatedService import get_authenticated_service, create_indexs
 from Channel import Channel
 from Configuration.cm import Cm
 from Video import Video

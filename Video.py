@@ -1,5 +1,5 @@
 import os
-from datetime import time
+from datetime import time, datetime
 from random import random
 
 import httplib2
@@ -7,8 +7,9 @@ from googleapiclient import http
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 
-from AuthenticatedService import get_authenticated_service, get_redis
+from AuthenticatedService import get_authenticated_service, get_redis, create_indexs
 from Channel import RETRIABLE_EXCEPTIONS, RETRIABLE_STATUS_CODES
+from DataBase.Elastic.ElasticOp import ElasticOp
 from Helper import build_resource, print_response
 
 
@@ -83,7 +84,11 @@ class Video:
                       media_file,
                       part='snippet,status')
 
+        #Publish uploaded video and insert the video's id to the elasticsearch.
         get_redis().publish("VideoUploaded",{"AddedVideo":res['id'],"title":videoData["title"]})
+        #create_indexs()
+        ElasticOp("videoall").InsertDoc(doc_type='videometadata', body={'AddedVideo':res['id'],'Date':datetime.now()})
+
         return "{", "AddedVideo:",res['id'], "}"
 
     def videos_delete(self, **kwargs):
