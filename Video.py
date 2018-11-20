@@ -86,7 +86,7 @@ class Video:
 
         #Publish uploaded video and insert the video's id to the elasticsearch.
         get_redis().publish("VideoUploaded",{"AddedVideo":res['id'],"title":videoData["title"]})
-        ElasticOp("videoall").InsertDoc(doc_type='videometadata', body={'AddedVideo':res['id'],'Date':datetime.now()})
+        ElasticOp("videoall").InsertDoc(doc_type='videometadata', body={'AddedVideo':res['id'],'title':videoData["title"],'comments':[],'Date':datetime.now()})
 
         return "{", "AddedVideo:",res['id'], "}"
 

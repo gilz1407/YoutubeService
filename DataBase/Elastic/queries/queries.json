@@ -1,12 +1,15 @@
 {
   "queries":[
     {
-      "name":"MatchByKey",
-      "index":"Person",
-      "type":"Person",
+      "name":"VideoById",
+      "index":"videoall",
+      "doc_type":"videometadata",
+      "type":"Video",
       "query":{
         "query": {
-          "match": {}
+          "match": {
+            "AddedVideo": "VUiMZv9tZO8"
+          }
         }
       }
     }
