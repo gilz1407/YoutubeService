@@ -26,4 +26,4 @@ class QuerySchema(Schema):
          module = getattr(i, 'Entities')
          cs = getattr(module, self.data['type'])
          cs = getattr(cs, self.data['type'])
-         return cs(**self.data)
+         return cs(self.data)
