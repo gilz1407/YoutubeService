@@ -15,7 +15,7 @@ google-auth==1.5.1
 google-auath-httplib2==0.0.3
 google-auth-oauthlib==0.2.0
 greenlet==0.4.15
-httplib2==0.11.3
+httplib2==0.19.0
 idna==2.7
 inflection==0.3.1
 itsdangerous==0.24
