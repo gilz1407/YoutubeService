@@ -34,7 +34,7 @@ PyYAML==3.13
 redis==2.10.6
 requests==2.19.1
 requests-oauthlib==1.0.0
-rsa==4.0
+rsa==4.7
 six==1.11.0
 swagger-spec-validator==2.4.0
 uritemplate==3.0.0
